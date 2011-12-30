@@ -2,15 +2,30 @@ package com.officialsounding.scrabble;
 
 import java.util.*;
 
+/**
+ * the Word class stores a word found in the dictionary, along with its value if played (without letter/word modifiers) on a standard English Scrabble board
+ * 
+ * @author Peter
+ *
+ */
 public class Word implements Comparable<Word>{
 
 	private List<Character> letters;
 	private int value;
 	
+	/**
+	 * this is the default constructor for an empty word
+	 */
 	public Word(){
 		letters = new ArrayList<Character>();
 		value = 0;
 	}
+	
+	/**
+	 * Use this Constructor to append a character to an existing Word object
+	 * @param wordsofar the existing word object to append to
+	 * @param c the character to append to the existing word
+	 */
 	public Word(Word wordsofar, char c) {
 		letters = new ArrayList<Character>();
 		for(char x: wordsofar.getLetters()){
@@ -20,6 +35,11 @@ public class Word implements Comparable<Word>{
 		value = wordsofar.getValue() + getScrabbleValue(c);
 	}
 
+	/**
+	 * get the English Scrabble value for the given character
+	 * @param c the character to find the value of
+	 * @return the value of the specified character
+	 */
 	private int getScrabbleValue(char c) {
 		// TODO Auto-generated method stub
 		switch(c){
@@ -60,15 +80,27 @@ public class Word implements Comparable<Word>{
 		return 0;
 	}
 
+	/**
+	 * get the Scrabble value of the Word
+	 * @return
+	 */
 	public int getValue() {
 		// TODO Auto-generated method stub
 		return value;
 	}
 
-	public List<Character> getLetters(){
+	/**
+	 * get the list of letters in the Word
+	 * @return
+	 */
+	private List<Character> getLetters(){
 		return letters;
 	}
 
+	/**
+	 * get a String representing the Word
+	 * @return
+	 */
 	public String getWord(){
 		StringBuffer sb = new StringBuffer();
 		for(char c: letters){
@@ -76,6 +108,10 @@ public class Word implements Comparable<Word>{
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * get the String and the Scrabble value of the Word
+	 */
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		sb.append(getWord());
@@ -86,14 +122,19 @@ public class Word implements Comparable<Word>{
 		return sb.toString();
 	}
 	
+	/**
+	 * get the length of the Word
+	 * @return
+	 */
 	public int getLength(){
 		return letters.size();
 	}
 	
-	@Override
+	
 	/**
 	 * sort by the word's scrabble value, decreasing
 	 */
+	@Override
 	public int compareTo(Word arg0) {
 		return -Integer.compare(getValue(), arg0.getValue());
 	}

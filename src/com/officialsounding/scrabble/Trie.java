@@ -8,6 +8,8 @@ class Trie {
 	private Node root;
 	//An array of letters, used for ListAll
 	private char[] alphabet;
+	
+	//the Set of words, used by findByLetters method
 	Set<Word> wordlist;
 	
 	//constructor: instantiate the root node
@@ -64,40 +66,66 @@ class Trie {
 		// return whether the word was there or not
 		return notpresent;
 	}
-
-	/**
-	 * isPresent checks if a given word is present in the Trie
-	 * @param a String s, the word to check
-	 * @return a boolean, representing whether the word is in the Trie
-	 */
 	
+	/**
+	 * findByLetters finds a list of all words within the data structure that can be constructed from the supplied list of Characters
+	 * @param letters the characters to use to find words 
+	 * @return a Set of Word objects, containing the list of words found in the Trie
+	 */
 	public Set<Word> findByLetters(List<Character> letters){
+		//reset the word list
 		wordlist = new HashSet<Word>();
 		
+		//start with an empty word
 		Word wordsofar = new Word();
+		
+		//call into the recursive method, starting with the root node and the empty word
 		findByLetters(letters,wordsofar,root);
 		
+		//return the completed list of words
 		return wordlist;
 	}
 	
+	/**
+	 *  The internal, recursive findByLetters runs against a list of characters, finding words in the Trie that match the list
+	 * @param letters the list of letters left to check
+	 * @param wordsofar the Word that has been constructed so far
+	 * @param currentnode the current node in the Trie
+	 */
 	private void findByLetters(List<Character> letters, Word wordsofar, Node currentnode){
+		
+		// if this node is terminal, then it can be added to the word list
 		if(currentnode.isTerminal() && wordsofar.getLength() > 2){
-			boolean result = wordlist.add(wordsofar);
+			wordlist.add(wordsofar);
 		}
+		// iterate through all characters left in the letters array
 		for(char c: letters){
+			// get the numeric position of the character c
 			int cvalue = (int)c - 97;
+			//if the character is a child of the current node, recurse down to that child
 			if(currentnode.hasChild(cvalue)){
 				findByLetters(subList(letters,c),new Word(wordsofar,c),currentnode.getChild(cvalue));
 			}
 		}
 	}
 	
+	/**
+	 * subList returns a list of Characters, less the character specified
+	 * @param letters the list of characters to modify
+	 * @param c the character to remove
+	 * @return {letters - c}
+	 */
 	private List<Character> subList(List<Character> letters, char c) {
 		List<Character> newlist = new ArrayList<Character>(letters);
 		newlist.remove(newlist.indexOf(c));
 		return newlist;
 	}
 
+	/**
+	 * isPresent checks if a given word is present in the Trie
+	 * @param a String s, the word to check
+	 * @return a boolean, representing whether the word is in the Trie
+	 */
 	public boolean isPresent(String s){
 		//start in the root
 		Node currentnode = root;
