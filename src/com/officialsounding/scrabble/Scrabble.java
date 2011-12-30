@@ -5,7 +5,7 @@ import java.util.*;
 public class Scrabble {
 
 	
-	private static String dictlocation = "D:\\media\\Downloads\\enable1.txt";
+	private static String dictlocation = "resources/enable1.txt";
 	public static void main(String[] args) throws FileNotFoundException{
 		Trie dictionary = new Trie();
 		List<Character> letters = new ArrayList<Character>();
