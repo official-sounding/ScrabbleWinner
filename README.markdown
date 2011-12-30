@@ -4,7 +4,10 @@ It uses the public domain list of words from Enhanced North American Benchmark L
 
 the word list is available from the [dotnetperls-controls](https://code.google.com/p/dotnetperls-controls/downloads/detail?name=enable1.txt&can=2&q=) project
 
-The program uses a Trie to store the words from the dictionary
+The program uses a Trie to store the words from the dictionary.  
+
+I wrote the Trie class for my Algorithms class in University, and then modified it to add functionality to search by a list of letters
+ so it's probably quite inefficient, but the program is performant with the small (~180k) dictionary and # of characters to search
 
 # Usage
 

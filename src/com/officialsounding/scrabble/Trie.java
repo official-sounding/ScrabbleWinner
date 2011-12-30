@@ -2,6 +2,24 @@ package com.officialsounding.scrabble;
 
 import java.util.*;
 
+/**
+ * A Trie stores words in a dictionary, where each letter is a node, and the next letter in the word is a child of that node
+ * 
+ * example, storing the words {a,abe,abet,ace,ad,ads}:
+ * 					a*
+ * 				/	|	\
+ * 				b	c	d*
+ * 				|	|	|
+ * 				e*	e*	s*
+ * 				|
+ * 				t*
+ *
+ *	terminal nodes in the example are marked with an asterisk
+ *
+ * class allows for insert, search (by words or a list of characters), list all elements, and non-lazy delete
+ * @author Peter Elliott
+ *
+ */
 class Trie {
 	
 	//Trie starts with a root node

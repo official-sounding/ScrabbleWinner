@@ -2,9 +2,14 @@ package com.officialsounding.scrabble;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Scrabble defines a command-line program that takes a list of arguments comprised of characters to search a dictionary for all words present that contain the specified letters
+ * 
+ * @author Peter Elliott
+ *
+ */
 public class Scrabble {
 
-	
 	private static String dictlocation = "resources/enable1.txt";
 	public static void main(String[] args) throws FileNotFoundException{
 		
